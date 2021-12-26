@@ -6,40 +6,34 @@ using UnityEngine.Playables;
 
 namespace rpg
 {
-    public class PlayerStats : MonoBehaviour, IDamageble
+    public class PlayerStats : MonoBehaviour
     {   
-        public PlayableDirector playableDirector;   
+        public static PlayerStats instance; 
         public float currentHealth;
         public float maxHealth; 
         public float currentArmor;
         public float maxArmor;
+        private PlayerUI playerUI;
+        private PlayerLevel playerLevel;
 
-        public void TakeDamage(float damage)
-        {
-            currentArmor -= damage;
-            if(currentArmor <= 0)
-            {
-                currentArmor = 0;
-                currentHealth -= damage;
-                if(currentHealth <= 0)
-                {
-                    currentHealth = 0;
-                    DieStatus();
-                }
-            }
+        private void Awake() {
+            instance = this;
+            playerLevel = GetComponent<PlayerLevel>();
+            playerUI = GameObject.FindGameObjectWithTag("Canvas").gameObject.GetComponent<PlayerUI>();
         }
 
-        public void DieStatus()
-        {
-            gameObject.SetActive(false);
+        public void SetHealth(float health){
+            Debug.Log("called");
+            currentHealth = health;
         }
+        public void UpdateLevelUI(){
 
-        private void OnDisable() 
-        {   
-            if(currentHealth <= 0)
-            {
-                playableDirector.Play();
-            }  
+        }
+        public void UpdateHealthUI(){
+            if(currentHealth <= maxHealth)
+                playerUI.armor.localScale = new Vector3(currentArmor/maxArmor, 1, 1);
+            if(currentHealth <= maxHealth)
+                playerUI.health.localScale = new Vector3(currentHealth/maxHealth, 1, 1);
         }
     }   
 }

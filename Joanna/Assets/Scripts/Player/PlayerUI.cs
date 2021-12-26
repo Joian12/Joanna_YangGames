@@ -20,6 +20,7 @@ namespace rpg
         public PlayerMovement playerMovement;
         public PlayerAttack_Interact playerAttack_Interact;
         public WeaponHolder weaponHolder;
+        public GameObject player;
         public PlayerStats playerStats;
         public RectTransform health;
         public RectTransform armor;
@@ -29,21 +30,24 @@ namespace rpg
         public int currentSwords;
         public int currentRange;
 
-        private void Awake() 
+        private void Start() 
         {   
-            playerStats = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerStats>();
-            playerMovement = playerStats.gameObject.GetComponent<PlayerMovement>();
-            weaponHolder = playerStats.gameObject.GetComponentInChildren<WeaponHolder>();
-            playerAttack_Interact = playerStats.gameObject.GetComponent<PlayerAttack_Interact>();
-            playerAnimationState = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerAnimationState>();
-            anim = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerStats>().gameObject.GetComponentInChildren<Animator>();
+            playerStats = PlayerStats.instance;
+            player = GameObject.FindGameObjectWithTag("Player").gameObject;
+            playerMovement = player.GetComponent<PlayerMovement>();
+            weaponHolder = player.GetComponentInChildren<WeaponHolder>();
+            playerAttack_Interact = player.GetComponent<PlayerAttack_Interact>();
+            playerAnimationState = player.GetComponent<PlayerAnimationState>();
+            anim = player.GetComponentInChildren<Animator>();
             
             Switch_Box();
         }
         void Update()
         {     
-            armor.localScale = new Vector3(playerStats.currentArmor/playerStats.maxArmor, 1, 1);
-            health.localScale = new Vector3(playerStats.currentHealth/playerStats.maxHealth, 1, 1);
+            /*if(playerStats.currentHealth <= playerStats.maxArmor)
+                armor.localScale = new Vector3(playerStats.currentArmor/playerStats.maxArmor, 1, 1);
+            if(playerStats.currentHealth <= playerStats.maxHealth)
+                health.localScale = new Vector3(playerStats.currentHealth/playerStats.maxHealth, 1, 1);*/
             interactUI.SetActive(playerAttack_Interact.interacting);
         }
 

@@ -126,8 +126,6 @@ namespace rpg
             
             for (int i = 0; i < InventoryMain.Instance.inventoryRange.Count; i++){
                 if(InventoryMain.Instance.inventoryRange[i] != null && InventoryMain.Instance.inventoryRange[i].currentUsed){
-                    Debug.Log(InventoryMain.Instance.inventoryRange[i].rangeWeaponName);
-                    Debug.Log(allRifle[i].transform.GetChild(0).gameObject.name);
                     allRifle[i].SetActive(true);
                 }else
                     allRifle[i].SetActive(false);  
