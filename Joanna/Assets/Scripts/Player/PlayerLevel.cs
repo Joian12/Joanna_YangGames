@@ -12,6 +12,7 @@ namespace rpg{
         public float rate;
         private void Start() {
             experience = new float[100];
+            level = 1;
             for (int i = 0; i < experience.Length; i++)
             {
                 experience[i] = (i*rate) * 120;
@@ -19,12 +20,15 @@ namespace rpg{
         }
 
         public void CheckIfExpIsEnoughForLevelUp(){
-
-            while (currentExp >= maxExp)
-            {
+            while (currentExp >= maxExp){
                 level++;
                 maxExp = experience[level];
             }
+        }
+
+        public void AddExp(float addedExp){
+            currentExp += addedExp;
+            CheckIfExpIsEnoughForLevelUp();
         }
     }
 }

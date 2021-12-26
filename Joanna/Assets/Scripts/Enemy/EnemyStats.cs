@@ -9,7 +9,7 @@ namespace rpg
     public class EnemyStats : MonoBehaviour, IDamageble
     {
         public float currentHealth;
-        public float maxHealth; 
+        public float maxHealth, exp; 
         public EnemyType enemyType;
 
         public Image healthBar;
@@ -30,6 +30,7 @@ namespace rpg
         }
 
         public void Death(){
+            
             if(currentHealth <= 0){
                 agent.isStopped = true;
                 anim.SetBool("death", true);
@@ -42,7 +43,7 @@ namespace rpg
         public void OnDisable(){   
             if(currentHealth <= 0){
                 QuestManager.instance.AddKillQuest(this ,1);
-                Debug.Log("Disabled when game stops");
+                PlayerStats.instance.UpdateLevelUI(exp);
             }
         }
     }

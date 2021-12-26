@@ -23,8 +23,9 @@ namespace rpg
         public GameObject player;
         public PlayerStats playerStats;
         public RectTransform health;
-        public RectTransform armor;
+        public RectTransform armor, expBar;
         public Animator anim;
+        public TextMeshProUGUI levelText;
 
         public int currentGloves;
         public int currentSwords;

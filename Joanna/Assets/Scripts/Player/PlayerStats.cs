@@ -14,7 +14,7 @@ namespace rpg
         public float currentArmor;
         public float maxArmor;
         private PlayerUI playerUI;
-        private PlayerLevel playerLevel;
+        public PlayerLevel playerLevel;
 
         private void Awake() {
             instance = this;
@@ -26,7 +26,10 @@ namespace rpg
             Debug.Log("called");
             currentHealth = health;
         }
-        public void UpdateLevelUI(){
+        public void UpdateLevelUI(float exp){
+            playerLevel.AddExp(exp);
+            playerUI.levelText.text = playerLevel.level.ToString();
+            playerUI.expBar.localScale = new Vector3(playerLevel.currentExp/playerLevel.maxExp, 1, 1);
 
         }
         public void UpdateHealthUI(){
