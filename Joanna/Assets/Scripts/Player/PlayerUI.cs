@@ -34,6 +34,7 @@ namespace rpg
         private void Start() 
         {   
             playerStats = PlayerStats.instance;
+            levelText.text = playerStats.playerLevel.level.ToString();
             player = GameObject.FindGameObjectWithTag("Player").gameObject;
             playerMovement = player.GetComponent<PlayerMovement>();
             weaponHolder = player.GetComponentInChildren<WeaponHolder>();
@@ -45,10 +46,6 @@ namespace rpg
         }
         void Update()
         {     
-            /*if(playerStats.currentHealth <= playerStats.maxArmor)
-                armor.localScale = new Vector3(playerStats.currentArmor/playerStats.maxArmor, 1, 1);
-            if(playerStats.currentHealth <= playerStats.maxHealth)
-                health.localScale = new Vector3(playerStats.currentHealth/playerStats.maxHealth, 1, 1);*/
             interactUI.SetActive(playerAttack_Interact.interacting);
         }
 
